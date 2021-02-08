@@ -1,3 +1,6 @@
+<?php
+    include "config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,4 +12,3 @@
 <body>
     <h1>-- FUCK YOU --</h1>
 </body>
-ith

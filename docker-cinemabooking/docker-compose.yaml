@@ -31,9 +31,9 @@ services:
             - data
         environment:
             MYSQL_ROOT_PASSWORD: secret
-            MYSQL_DATABASE: project
-            MYSQL_USER: lol
-            MYSQL_PASSWORD: lol
+            MYSQL_DATABASE: bookingmgr
+            MYSQL_USER: usr1
+            MYSQL_PASSWORD: secretpswd
         ports:
         - "8083:3306"
     data:
