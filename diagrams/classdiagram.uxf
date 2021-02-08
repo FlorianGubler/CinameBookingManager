@@ -1,23 +1,43 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>90</x><y>290</y><w>210</w><h>190</h></coordinates><panel_attributes>movie
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>90</x><y>19</y><w>210</w><h>190</h></coordinates><panel_attributes>user
 --
 int: id
+string: username
+string(sha256): password
+--
+logincheck()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>19</y><w>210</w><h>190</h></coordinates><panel_attributes>seat
+--
+int: row
+int: col
+bool: except
+bool: reservated
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>19</y><w>210</w><h>190</h></coordinates><panel_attributes>room
+--
+int: nr
+array(obj: seat): seats
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>219</y><w>210</w><h>190</h></coordinates><panel_attributes>movie
+--
 string: name
+file: img
+array(obj: mv_time): times
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>219</y><w>210</w><h>190</h></coordinates><panel_attributes>mv_time
 --
-createmovie()
-showmovies()
-info()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>290</y><w>210</w><h>190</h></coordinates><panel_attributes>admin
+obj: room
+time: start
+time: end
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>509</y><w>210</w><h>190</h></coordinates><panel_attributes>reservation
 --
-string: name
-int: id
+obj: mv_time
+obj: reservation_user
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>509</y><w>210</w><h>190</h></coordinates><panel_attributes>reservation_user
 --
-login()
-logout()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>290</y><w>210</w><h>190</h></coordinates><panel_attributes>room
---
-int: seats
-int: id
---
-showseats() &lt;- "shows availability"
-createroom()
+string: firstname
+string: lastname
+array(obj: seats): reservated_seats
+
 </panel_attributes><additional_attributes></additional_attributes></element></diagram>
