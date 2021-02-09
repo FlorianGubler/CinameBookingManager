@@ -1,4 +1,5 @@
 <?php
+    $location = "..";
     include "../config/config.php";
     if(isset($_COOKIE['session-id'])){
         foreach($usersarr as $user){
@@ -13,7 +14,6 @@
     else{
         header("Location: ../../index.php");
     }
-    $location = "..";
 ?>
 <!DOCTYPE html>
 <html lang="en">
