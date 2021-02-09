@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/register.css">
     <?php include "../page_addon/allheadfiles.php"; ?>
-    <title>Bookingmanager - Register</title>
+    <title>Bookingmanager - Reservation</title>
 </head>
 <body>
     <?php include "../page_addon/navbar.php"; ?>
@@ -49,7 +49,10 @@
                     foreach($currmov->times as $time){
                         if(explode(" ", $time->start)[0] == $date){
                             echo "<form action='sug_reservation.php' method='post'>";
-                            echo "<a>- ".explode(" ", $time->start)[1]." in Raum ".$time->room."   <b> |  Ticket wählen</b></a><br>";
+                            echo "<input class='shadowinput' value='".$currmov->name."' name='mv_name'>";
+                            echo "<input class='shadowinput' value='".$time->room."' name='room'>";
+                            echo "<input class='shadowinput' value='".$time->start.";".$time->end."' name='date'>";
+                            echo "<button type='submit' name='set-res-btn'>- ".explode(" ", $time->start)[1]." in Raum ".$time->room."   <b> |  Ticket wählen</b></button><br>";
                             echo "</form>";
                         }
                     }

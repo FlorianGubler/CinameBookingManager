@@ -100,6 +100,7 @@
                 foreach($room->seats as $seat){
                     if($seat->id == $row_res_seats['FK_seat']){
                         array_push($newreservation->reservated_seats, $seat);
+                        $seat->reservated = true;
                     }
                 }
             }
