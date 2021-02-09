@@ -1,3 +1,6 @@
+body{
+    background-color: gray;
+}
 .dashboard{
     display: flex;
     flex-direction: row;
@@ -7,17 +10,21 @@
     height: 100%;
 }
 .moviediv{
-    width: 7%;
-    height: 10%;
+    width: 195px;
+    height: 285px;
     text-align: center;
     margin: 10px;
+    margin-right: 2px;
     border-radius: 5px;
-    border: 1px solid rgb(218, 218, 218);
+    border: none;;
     object-fit: cover;
     cursor: pointer;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(168, 168, 168);
+    color: rgb(201, 201, 201);
+}
+.moviediv:hover{
+    opacity: 0.75;
 }
 
 

@@ -3,17 +3,22 @@
         public $id;
         public $name;
         public $img;
+        public $fsk;
+        public $description;
         public $times = array();
 
-        public function __construct($id, $name, $img_path)
+        public function __construct($id, $name, $img_path, $fsk, $description, $location)
         {
             $this->id = $id;
             $this->name = $name;
-            if(file_exists ("assets/image/".$img_path)){
-                $this->img = "assets/image/".$img_path;
+            $this->fsk = $fsk;
+            $this->description = $description;
+            
+            if(file_exists ($location."/image/".$img_path)){ //From Config.php File
+                $this->img = $img_path;
             }
             else{
-                $this->img = "assets/image/default.jpg";
+                $this->img = "default.jpg";
             }
         }
     }

@@ -1,6 +1,6 @@
 <?php
-    include "assets/config/config.php";
     $location = "assets";
+    include "assets/config/config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
     <div class="dashboard">
         <?php
             foreach($moviearr as $movie){
-                echo "<a href='assets/pages/register.php?mov=".urlencode($movie->name)."' class='moviediv'><img src='".$movie->img."' alter='Title Picture ".$movie->name."' ><p>".$movie->name."</p></a>";
+                echo "<a href='assets/pages/register.php?mov=".urlencode($movie->name)."' class='moviediv'><img src='assets/image/".$movie->img."' alter='Title Picture ".$movie->name."' ><p>".$movie->name."</p></a>";
             }
         ?>
     </div>

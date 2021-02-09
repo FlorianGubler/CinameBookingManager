@@ -2,10 +2,23 @@
     padding: 0;
     margin: 0;
 }
+body{
+    width: 80%;
+    min-height: 100vh;
+    height: max-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+html{
+    background-color: rgb(185, 185, 185);
+    background-image: url("../image/icons/favicon512.png");
+    background-repeat: repeat;
+}
 .navbar{
     width: 100%;
-    height: 75px;
-    background-color: rgb(47, 64, 65);
+    height: 60px;
+    background-color: rgba(45, 20, 59, 0.904);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,7 +28,7 @@
     margin: 20px;
 }
 .navbar ul{
-    width: 100px;
+    width: 125px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -25,19 +38,22 @@
 .navbar h2{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     justify-self: flex-start;
-    color: rgb(163, 163, 163);
+    color: rgb(255, 255, 255);
 }
 .navbar li{
     list-style: none;
+    color: rgb(194, 194, 194);
 }
 .navbar a{
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(190, 135, 135);
+    color: rgb(255, 255, 255);
 }
 .navbar a:hover{
-    color: rgb(209, 76, 76);
+    color: rgb(163, 88, 88);
 }
+
+
 .login{
     display: none;
 }
