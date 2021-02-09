@@ -1,6 +1,4 @@
-body{
-    background-color: gray;
-}
+
 .dashboard{
     display: flex;
     flex-direction: row;
@@ -21,7 +19,7 @@ body{
     cursor: pointer;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(201, 201, 201);
+    color: rgb(104, 104, 104);
 }
 .moviediv:hover{
     opacity: 0.75;
