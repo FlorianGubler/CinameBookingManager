@@ -1,0 +1,78 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.navbar{
+    width: 100%;
+    height: 75px;
+    background-color: rgb(47, 64, 65);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar ul, .navbar img{
+    margin: 20px;
+}
+.navbar ul{
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+.navbar h2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-self: flex-start;
+    color: rgb(163, 163, 163);
+}
+.navbar li{
+    list-style: none;
+}
+.navbar a{
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(190, 135, 135);
+}
+.navbar a:hover{
+    color: rgb(209, 76, 76);
+}
+.login{
+    display: none;
+}
+.login:target{
+    display: block;
+}
+.login form{
+    width: 25%;
+    height: 40%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid rgb(226, 226, 226);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.login input, .login button{
+    margin: -10px;
+    width: 70%;
+    height: 30px;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 5px;
+    padding: 5px;
+}
+.login button{
+    cursor: pointer;
+    background-color: rgb(231, 231, 231);
+}
+.login a{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

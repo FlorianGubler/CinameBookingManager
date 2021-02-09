@@ -1,5 +1,6 @@
 <?php
-    include "config.php";
+    include "assets/config/config.php";
+    $location = "assets";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +8,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <?php include "assets/page_addon/allheadfiles.php"; ?>
+    <title>Bookingmanager - Home</title>
 </head>
 <body>
-    <h1>-- FUCK YOU --</h1>
+    <?php include "assets/page_addon/navbar.php"; ?>
+    <div class="dashboard">
+        <?php
+            foreach($moviearr as $movie){
+                echo "<a href='assets/pages/register.php?mov=".urlencode($movie->name)."' class='moviediv'><img src='".$movie->img."' alter='Title Picture ".$movie->name."' ><p>".$movie->name."</p></a>";
+            }
+        ?>
+    </div>
 </body>
