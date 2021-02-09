@@ -13,6 +13,10 @@
             $this->id = $id;
             $this->reservation_user = $reservation_user;
         }
+
+        public function safetodb(){
+            
+        }
     }
 
     class Reservation_User{

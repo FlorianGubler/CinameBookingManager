@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.navbar{
+    width: 100%;
+    height: 75px;
+    background-color: rgb(47, 64, 65);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar ul, .navbar img{
+    margin: 20px;
+}
+.navbar ul{
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+.navbar h2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-self: flex-start;
+    color: rgb(163, 163, 163);
+}
+.navbar li{
+    list-style: none;
+}
+.navbar a{
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(190, 135, 135);
+}
+.navbar a:hover{
+    color: rgb(209, 76, 76);
+}
