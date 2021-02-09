@@ -1,5 +1,6 @@
 <?php
     include "../config/config.php";
+    $location = "..";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/navbar.css">
-    <?php include "allheadfiles.php"; ?>
+    <?php include "../page_addon/allheadfiles.php"; ?>
     <title>Bookingmanager - Register</title>
 </head>
 <body>
-    <?php include "navbar.php"; ?>
+    <?php include "../page_addon/navbar.php"; ?>
 </body>

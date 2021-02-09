@@ -19,43 +19,5 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(168, 168, 168);
 }
-.login{
-    display: none;
-}
-.login:target{
-    display: block;
-}
-.login form{
-    width: 25%;
-    height: 40%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    border-radius: 5px;
-    background-color: white;
-    border: 1px solid rgb(226, 226, 226);
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.login input, .login button{
-    margin: -10px;
-    width: 70%;
-    height: 30px;
-    border: 1px solid rgb(228, 228, 228);
-    border-radius: 5px;
-    padding: 5px;
-}
-.login button{
-    cursor: pointer;
-    background-color: rgb(231, 231, 231);
-}
-.login a{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
 
 

@@ -1,14 +1,6 @@
 <?php
     include "assets/config/config.php";
-
-    if(isset($_POST['login-submit'])){
-        foreach($usersarr as $user){
-            if($user->logincheck($_POST['login-usrname'],$_POST['login-passwd'])){
-                setcookie("session-id", hash("sha256", $user->id), 0);
-                header("Location: assets/pages/admin.php");
-            }
-        }
-    }
+    $location = "assets";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,19 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
-    <?php include "allheadfiles.php"; ?>
+    <?php include "assets/page_addon/allheadfiles.php"; ?>
     <title>Bookingmanager - Home</title>
 </head>
 <body>
-    <div id="login" class="login">
-        <form action="" method="post">
-            <a href="#"><i class="fas fa-times"></i></a>
-            <h2>Login</h2>
-            <input placeholder="Username" name="login-usrname" type="username">
-            <input placeholder="Password" name="login-passwd" type="password">
-            <button name="login-submit" type="submit">Login</button>
-        </form>
-    </div>
     <?php include "assets/page_addon/navbar.php"; ?>
     <div class="dashboard">
         <?php

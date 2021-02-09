@@ -13,6 +13,7 @@
     else{
         header("Location: ../../index.php");
     }
+    $location = "..";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,12 +23,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/navbar.css">
-    <?php include "allheadfiles.php"; ?>
+    <?php include "../page_addon/allheadfiles.php"; ?>
     <title>Bookingmanager - Admin Config</title>
 </head>
 <body>
-    <a href="../../index.php">Back</a>
     <?php include "../page_addon/navbar.php"; ?>
+    <a style="cursor:pointer;" onclick="history.go(-2);">Back</a>
     <h2>Users</h2>
     <ul>
         <?php
