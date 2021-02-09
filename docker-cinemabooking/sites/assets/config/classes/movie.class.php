@@ -9,11 +9,11 @@
         {
             $this->id = $id;
             $this->name = $name;
-            if(file_exists ("assets/".$img_path)){
-                $this->img = "assets/".$img_path;
+            if(file_exists ("assets/image/".$img_path)){
+                $this->img = "assets/image/".$img_path;
             }
             else{
-                $this->img = "assets/default.jpg";
+                $this->img = "assets/image/default.jpg";
             }
         }
     }

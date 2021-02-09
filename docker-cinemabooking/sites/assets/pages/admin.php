@@ -1,5 +1,5 @@
 <?php
-    include "../config.php";
+    include "../config/config.php";
     if(isset($_COOKIE['session-id'])){
         foreach($usersarr as $user){
             if(hash("sha256", $user->id) == $_COOKIE['session-id']){
@@ -7,11 +7,11 @@
             }
         }
         if($check != true){
-            header("Location: ../index.php");
+            header("Location: ../../index.php");
         }
     }
     else{
-        header("Location: ../index.php");
+        header("Location: ../../index.php");
     }
 ?>
 <!DOCTYPE html>
@@ -20,14 +20,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/navbar.css">
     <?php include "allheadfiles.php"; ?>
     <title>Bookingmanager - Admin Config</title>
 </head>
 <body>
-    <a href="../index.php">Back</a>
-    <?php include "navbar.php"; ?>
+    <a href="../../index.php">Back</a>
+    <?php include "../page_addon/navbar.php"; ?>
     <h2>Users</h2>
     <ul>
         <?php
