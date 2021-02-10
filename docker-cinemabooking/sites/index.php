@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
     <?php include "assets/page_addon/allheadfiles.php"; ?>
-    <title>Bookingmanager - Home</title>
+    <title>LedX - Home</title>
 </head>
 <body>
     <?php include "assets/page_addon/navbar.php"; ?>

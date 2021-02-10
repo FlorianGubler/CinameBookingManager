@@ -45,7 +45,7 @@ if(isset($_POST["room-show"])) {
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <?php include "../page_addon/allheadfiles.php"; ?>
-    <title>Bookingmanager - Admin Config</title>
+    <title>LedX - Admin Config</title>
 </head>
 
 <body>

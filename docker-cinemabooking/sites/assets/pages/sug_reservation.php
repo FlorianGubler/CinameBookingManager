@@ -99,7 +99,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/register.css">
     <?php include "../page_addon/allheadfiles.php"; ?>
-    <title>Bookingmanager - Reservation</title>
+    <title>LedX - Reservation</title>
 </head>
 <body>
     <?php include "../page_addon/navbar.php"; ?>
