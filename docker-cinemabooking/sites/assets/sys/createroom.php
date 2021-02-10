@@ -10,9 +10,9 @@
         die("Failed to connect to MySQL: " . $conn->connect_error);
     }
 
-    $rows = 10;
-    $cols = 20;
-    $room = 1;
+    $rows = 6;
+    $cols = 15;
+    $room = 2;
 
     for($i=1; $i <= $rows; $i++){
         for($b=1; $b <= $cols; $b++){

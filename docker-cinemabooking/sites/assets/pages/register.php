@@ -52,7 +52,7 @@
                             echo "<input class='shadowinput' value='".$currmov->name."' name='mv_name'>";
                             echo "<input class='shadowinput' value='".$time->room."' name='room'>";
                             echo "<input class='shadowinput' value='".$time->start.";".$time->end."' name='date'>";
-                            echo "<button type='submit' name='set-res-btn'>- ".explode(" ", $time->start)[1]." in Raum ".$time->room."   <b> |  Ticket wählen</b></button><br>";
+                            echo "<button type='submit' name='set-res-btn'>".explode(" ", $time->start)[1]." in Kinosaal ".$time->room." | <b> Ticket wählen</b></button><br>";
                             echo "</form>";
                         }
                     }
