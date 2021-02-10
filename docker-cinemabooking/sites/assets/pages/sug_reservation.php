@@ -23,6 +23,41 @@
             $roomseats[$seat->row][$seat->col] = $seat;
         }
     }
+    else if(isset($_POST['sub-order'])){
+        $movie = $_POST['movie'];
+        $room = $_POST['room'];
+        $date_start = explode(";", $_POST['date'])[0];
+        $date_end = explode(";", $_POST['date'])[1];
+        $res_seats = json_decode($_POST['res-seats']);
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        
+        //Create Reservation User
+        $new_res_usr = new Reservation_User($firstname, $lastname);
+
+        //Find Room Object
+        foreach($roomarr as $rooms){
+            if($rooms->id == $room){
+                $curroom = $rooms;
+            }
+        }
+
+        //Find Reservation Seats and push to Reservation User
+        foreach($curroom->seats as $seat){
+            foreach($res_seats as $res_seat){
+                $rowcol = explode("_", $res_seat)[1];
+                $row = explode("-", $rowcol)[0];
+                $col = explode("-", $rowcol)[1];
+                if($row == $seat->row && $col == $seat->col){
+                    $new_res_seat = $seat;
+                    array_push($new_res_usr->reservation_seats, $new_res_seat);
+                }
+            }
+        }
+        //Create Reservation
+
+
+    }
     else{
         header("Location: ../../index.php");
     }
@@ -61,7 +96,7 @@
                                                     echo "<div class='seat' style='background-color: red'></div>";
                                                 }
                                                 else{
-                                                    echo "<div class='seat' style='background-color: green'></div>";
+                                                    echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: green'></div>";
                                                 }
                                             }
                                             else{
@@ -77,9 +112,13 @@
                     </table>
                 </div>
                 <p>*Die Leinwand befindet sich vorne und die Eingänge hinten links und rechts. <br>Die Notausgänge befinden sich auf beiden <br>Seiten der Leinwand und sind mit einem grünen Schild markiert.</p>
-                <input type="text" placeholder="Name" name="lastname">
-                <input type="text" placeholder="Vorname" name="firstname">
-                <button type="submit" name="sub-oder">Abschliessen</button>
+                <input class="shadowinput" id="res-seats" name="res-seats">
+                <input class="shadowinput" id="movie" name="movie">
+                <input class="shadowinput" id="date" name="date">
+                <input class="shadowinput" id="room" name="room">
+                <input id="get-lastname" type="text" placeholder="Name" name="lastname">
+                <input id="get-firstname" placeholder="Vorname" name="firstname">
+                <button type="submit" id="sub-btn-order" name="sub-order">Abschliessen</button>
             </form>
         </div>
     </div>
@@ -87,21 +126,16 @@
         var reservationmovname;
         var reservationstarttime;
         var reservationendtime;
+        var res_seatsarr = [];
 
-        function getresinfo(){
-            xmlreq = new XMLHttpRequest;
-            xmlreq.open("POST", "", true);
-            xmlreq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xmlreq.onreadystatechange = function(){
-                if(this.readyState === XMLHttpRequest.DONE && this.status === 200){
-                    if(func == "del" && this.response == "success"){
-                        
-                    }
-                    else if(this.response != "success"){
-                        alert("Error occured: '"+this.response+"'");
-                    }
-                }
-            }
+        function setseat(objid){
+            res_seatsarr.push(objid);
+            document.getElementById(objid).style.backgroundColor = "blue";
+
+            document.getElementById('movie').value = '<?php echo $movie; ?>';
+            document.getElementById('room').value = '<?php echo $room; ?>';
+            document.getElementById('date').value = '<?php echo $date_start.";".$date_end; ?>';
+            document.getElementById('res-seats').value = JSON.stringify(res_seatsarr);
         }
     </script>
 </body>

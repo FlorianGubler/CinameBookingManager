@@ -140,6 +140,7 @@
 }
 #order h2{
     font-size: 20px;
+    text-align: center;
 }
 #order input, #order button{
     margin: 5px;

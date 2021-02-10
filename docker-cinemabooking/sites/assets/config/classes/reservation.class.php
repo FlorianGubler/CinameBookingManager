@@ -14,7 +14,7 @@
             $this->reservation_user = $reservation_user;
         }
 
-        public function safetodb(){
+        public function safetodb($dbconnection){
             
         }
     }

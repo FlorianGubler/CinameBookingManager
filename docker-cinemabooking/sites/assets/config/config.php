@@ -60,7 +60,7 @@
         $sql_seat = "SELECT * FROM seats WHERE FK_room=".$room->id.";";
         if ($result_seat = $conn->query($sql_seat)) {
             while ($row_seat = $result_seat->fetch_assoc()) {
-                $newseat = new Seat($row_seat['id'], $row_seat['row'], $row_seat['col'], $row_seat['except'], false);
+                $newseat = new Seat($row_seat['row'], $row_seat['col'], $row_seat['except'], false);
                 array_push($room->seats, $newseat);
             }
         }
