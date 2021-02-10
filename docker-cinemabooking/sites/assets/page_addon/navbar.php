@@ -26,7 +26,7 @@
     </form>
 </div>
 <nav class="navbar">
-    <img src="<?php echo $location ?>/image/icons/favicon.ico" alt="Logo" width="40px" height="40px">
+    <a href="<?php echo $location ?>/../index.php"><img src="<?php echo $location ?>/image/icons/icon_t.png" alt="Logo" width="160px" height="40px"></a>
     <ul>
         <li><a href="<?php echo $location ?>/../index.php">Home</a></li>
         <li> | </li>
