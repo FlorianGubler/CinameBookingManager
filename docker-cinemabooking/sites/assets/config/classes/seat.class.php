@@ -1,7 +1,7 @@
 <?php
     class Seat{
-        public $id;
         public $row;
+        public $id;
         public $col;
         public $except;
         public $reservated;

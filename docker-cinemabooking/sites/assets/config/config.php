@@ -89,23 +89,24 @@
                 }
             }
 
-            $newreservation = new Reservation($row_reservation['id'], $newres_movie, $newres_mv_times, $newreservation_usr);
+            $newreservation = new Reservation($newres_movie, $newres_mv_times, $newreservation_usr);
 
             //Get Reservated Seats
             $sql_res_seats = "SELECT * FROM reservated_seats WHERE FK_reservation=".$row_reservation['id'].";";
             if ($result_res_seats = $conn->query($sql_res_seats)) {
-                $row_res_seats = $result_res_seats->fetch_assoc();
-            }
-            foreach($roomarr as $room){
-                foreach($room->seats as $seat){
-                    if($seat->id == $row_res_seats['FK_seat']){
-                        array_push($newreservation->reservated_seats, $seat);
-                        $seat->reservated = true;
+                while($row_res_seats = $result_res_seats->fetch_assoc()){
+                    foreach($roomarr as $room){
+                        foreach($room->seats as $seat){
+                            if($seat->id == $row_res_seats['FK_seat']){
+                                array_push($newreservation->reservated_seats, $seat);
+                                $seat->reservated = true;
+                            }
+                        }
                     }
+    
+                    array_push($reservationarr, $newreservation);
                 }
             }
-
-            array_push($reservationarr, $newreservation);
         }
     }
     $conn->close();
