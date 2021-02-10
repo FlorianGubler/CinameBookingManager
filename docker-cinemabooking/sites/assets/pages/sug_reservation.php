@@ -42,20 +42,48 @@
             }
         }
 
-        //Find Reservation Seats and push to Reservation User
+        //Find Reservation Seats and push to Reservation Array 
+        $res_seats_arr = array();
         foreach($curroom->seats as $seat){
             foreach($res_seats as $res_seat){
                 $rowcol = explode("_", $res_seat)[1];
                 $row = explode("-", $rowcol)[0];
                 $col = explode("-", $rowcol)[1];
                 if($row == $seat->row && $col == $seat->col){
-                    $new_res_seat = $seat;
-                    array_push($new_res_usr->reservation_seats, $new_res_seat);
+                    if(!$seat->reservated){
+                        $new_res_seat = $seat;
+                        array_push($res_seats_arr, $new_res_seat);
+                    }
                 }
             }
         }
-        //Create Reservation
 
+        //Find Movie & Movie Times Object
+        foreach($moviearr as $movies){
+            if($movies->name == $movie){
+                $currmov = $movies;
+                foreach($movies->times as $movie_time){
+                    if($movie_time->start == $date_start && $movie_time->end == $date_end){
+                        $currmov_time = $movie_time;
+                    }
+                }
+            }
+        }
+
+        //Create Reservation
+        $new_res = new Reservation($currmov, $currmov_time, $new_res_usr);
+        $new_res->reservated_seats = $res_seats_arr;
+
+        //Create DB Connection
+        $conntwo = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_errno) {
+            die("Failed to connect to MySQL: " . $conn->connect_error);
+        }
+
+        $new_res->safetodb($conntwo);
+
+        header("Location: ../../index.php");
 
     }
     else{

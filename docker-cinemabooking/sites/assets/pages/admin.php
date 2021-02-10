@@ -125,7 +125,7 @@ if(isset($_POST["room-show"])) {
         <ul>
             <?php
             foreach ($reservationarr as $reservation) {
-                echo "<li>" . $reservation->id . ": " . $reservation->reservation_user->firstname . ", " . $reservation->reservation_user->lastname . " -> Movie: " . $reservation->movie->name . ", Time: " . $reservation->mv_time->start . " - " . $reservation->mv_time->end;
+                echo "<li>".$reservation->reservation_user->firstname . ", " . $reservation->reservation_user->lastname . " -> Movie: " . $reservation->movie->name . ", Time: " . $reservation->mv_time->start . " - " . $reservation->mv_time->end;
                 echo "<li><b>Seats: </b>";
                 foreach ($reservation->reservated_seats as $res_seats) {
                     echo $res_seats->row . ";" . $res_seats->col . " / ";
