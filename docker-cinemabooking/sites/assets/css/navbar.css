@@ -4,8 +4,8 @@
 }
 body{
     width: 80%;
-    min-height: 100vh;
-    height: max-content;
+    min-height: 93.5vh;
+    height: min-content;
     position: relative;
     left: 50%;
     transform: translate(-50%);
