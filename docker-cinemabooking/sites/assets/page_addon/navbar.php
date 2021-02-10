@@ -16,6 +16,7 @@
         }
     }
 ?>
+<div class="headinfo"><p>&copy 2021 by Nino Arisona, Jon Bunjaku und Florian Gubler</p><a target="_blank" href="https://www.zli.ch">zli.ch</a></div>
 <div id="login" class="login">
     <form action="" method="post">
         <a href="#"><i class="fas fa-times"></i></a>
