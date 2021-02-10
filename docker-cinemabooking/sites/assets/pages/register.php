@@ -58,6 +58,9 @@
                     }
                     echo "</div>";
                 }
+                if(count($dates) == 0){
+                    echo "<p>Leider sind zurzeit keine Vorstellungen für diesen Film verfügbar</p>";
+                }
             ?>
         </div>
 
