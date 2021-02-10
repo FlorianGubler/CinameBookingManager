@@ -44,7 +44,7 @@
         <a class="back-btn" onclick="history.back()"><i class="fas fa-chevron-left"></i> Zurück</a>
         <div id="order">
             <form action="" method="POST">
-                <h2>Ticketkauf abschliessen für <?php echo $movie ?></h2>
+                <h2>Ticketkauf abschliessen für <?php echo $movie ?> am <?php echo explode(" ", $date_start)[0]." um ".explode(" ", $date_start)[1]." Uhr" ?></h2>
                 <h4>Kinosaal <?php echo $curroom->number ?></h4>
                 <div class="input-seats">
                     <table>
@@ -76,8 +76,8 @@
                         </tr>
                     </table>
                 </div>
-                <p>*Die Leinwand befindet sich vorne und die Eingänge hinten links und rechts. <br>Die notausgänge befinden sich auf beiden <br>Seiten der Leinwand und sind mit einem Schild markiert.</p>
-                <input type="text" placeholder="Nachname" name="lastname">
+                <p>*Die Leinwand befindet sich vorne und die Eingänge hinten links und rechts. <br>Die Notausgänge befinden sich auf beiden <br>Seiten der Leinwand und sind mit einem grünen Schild markiert.</p>
+                <input type="text" placeholder="Name" name="lastname">
                 <input type="text" placeholder="Vorname" name="firstname">
                 <button type="submit" name="sub-oder">Abschliessen</button>
             </form>

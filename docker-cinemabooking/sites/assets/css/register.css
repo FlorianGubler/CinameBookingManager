@@ -108,7 +108,7 @@
 }
 .input-seats{
     width: min-content;
-    height: 250px;
+    height: min-content;
     border: 1px solid rgb(172, 172, 172);
 }
 #canvas{
@@ -137,6 +137,9 @@
 #order h2, #order h4, .input-seats, #order input, #order button, #order p{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 10px;
+}
+#order h2{
+    font-size: 20px;
 }
 #order input, #order button{
     margin: 5px;
