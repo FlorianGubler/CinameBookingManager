@@ -16,6 +16,7 @@
         }
     }
 ?>
+<div class="headinfo"><p>&copy 2021 by Nino Arisona, Jon Bunjaku und Florian Gubler</p><a target="_blank" href="https://www.zli.ch">zli.ch</a></div>
 <div id="login" class="login">
     <form action="" method="post">
         <a href="#"><i class="fas fa-times"></i></a>
@@ -26,8 +27,7 @@
     </form>
 </div>
 <nav class="navbar">
-    <img src="<?php echo $location ?>/image/icons/favicon.ico" alt="Logo" width="40px" height="40px">
-    <h2>Ticketmanager ZLI BLJ 2021</h2>
+    <a href="<?php echo $location ?>/../index.php"><img src="<?php echo $location ?>/image/icons/icon_t.png" alt="Logo" width="160px" height="40px"></a>
     <ul>
         <li><a href="<?php echo $location ?>/../index.php">Home</a></li>
         <li> | </li>
