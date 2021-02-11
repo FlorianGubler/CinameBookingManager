@@ -25,6 +25,7 @@
             array_push($usersarr, $newusr);
         }
     }
+
     //Get Movies & Movie Times
     $moviearr = array();
     $sql_movie = "SELECT * FROM movies";
@@ -100,6 +101,9 @@
                             if($seat->id == $row_res_seats['FK_seat']){
                                 array_push($newreservation->reservated_seats, $seat);
                                 $seat->reservated = true;
+
+                                //Get Reservated movie and movie time and push them to seat
+                                array_push($seat->reservated_mv_times, array($newres_movie, $newres_mv_times));
                             }
                         }
                     }

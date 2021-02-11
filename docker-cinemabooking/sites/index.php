@@ -16,13 +16,17 @@
 <body>
     <?php include "assets/page_addon/navbar.php"; ?>
     <div class="dashboard">
-        <?php
-            foreach($moviearr as $movie){
-                echo "<a href='assets/pages/register.php?mov=".urlencode($movie->name)."' class='moviediv'><img src='assets/image/".$movie->img."' alter='Title Picture ".$movie->name."' ><p>".$movie->name."</p></a>";
-            }
-            if(count($moviearr) == 0){
-                echo "<p style='padding: 10px; font-family: Verdana;'><b>Leider sind zurzeit keine Filme verfügbar</b></p>";
-            }
-        ?>
+        <table>
+            <?php
+                $limiter = 5;
+                //Make a table
+                foreach($moviearr as $movie){
+                    echo "<a href='assets/pages/register.php?mov=".urlencode($movie->name)."' class='moviediv'><img src='assets/image/".$movie->img."' alter='Title Picture ".$movie->name."' ><p>".$movie->name."</p></a>";
+                }
+                if(count($moviearr) == 0){
+                    echo "<p style='padding: 10px; font-family: Verdana;'><b>Leider sind zurzeit keine Filme verfügbar</b></p>";
+                }
+            ?>
+        </table>
     </div>
 </body>

@@ -5,6 +5,7 @@
         public $col;
         public $except;
         public $reservated;
+        public $reservated_mv_times = array();
 
         public function __construct($id, $row, $col, $except)
         {
