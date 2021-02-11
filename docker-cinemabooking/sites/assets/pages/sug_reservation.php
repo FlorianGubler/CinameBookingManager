@@ -14,6 +14,18 @@
             }
         }
 
+        foreach($moviearr as $movies){
+            if($movies->name == $movie){
+                $currmov = $movies;
+                foreach($movies->times as $movie_time){
+                    if($movie_time->start == $date_start && $movie_time->end == $date_end){
+                        $currmov_time = $movie_time;
+                    }
+                }
+            }
+        }
+
+
         //Get Seats to load in a 2 dimensianal array
         $roomseats = array();
         foreach($curroom->seats as $seat){
@@ -99,7 +111,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/register.css">
     <?php include "../page_addon/allheadfiles.php"; ?>
-    <title>Bookingmanager - Reservation</title>
+    <title>LedX - Reservation</title>
 </head>
 <body>
     <?php include "../page_addon/navbar.php"; ?>
@@ -121,7 +133,14 @@
                                             echo "<td>";
                                             if(!$seat->except){
                                                 if($seat->reservated){
-                                                    echo "<div class='seat' style='background-color: red'></div>";
+                                                    foreach($seat->reservated_mv_times as $res_mv_time_seat){
+                                                        if($res_mv_time_seat[0] == $currmov && $res_mv_time_seat[1] == $currmov_time){
+                                                            echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: red'></div>";
+                                                        }
+                                                        else{
+                                                            echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: green'></div>";
+                                                        }
+                                                    }
                                                 }
                                                 else{
                                                     echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: green'></div>";
