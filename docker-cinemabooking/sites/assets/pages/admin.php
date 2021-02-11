@@ -5,6 +5,7 @@ if (isset($_COOKIE['session-id'])) {
     foreach ($usersarr as $user) {
         if (hash("sha256", $user->id) == $_COOKIE['session-id']) {
             $check = true;
+            $conn = new mysqli($servername, $username, $password, $dbname);
         }
     }
     if ($check != true) {
@@ -33,7 +34,15 @@ if (isset($_POST["room-show"])) {
     $showroom = TRUE;
 }
 if (isset($_POST["create-submit"])){
-    echo "fuck"; //easter egg
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $password = hash("sha256", $username.$password);
+
+    $sql_create_user = "INSERT INTO users (users.username, users.password) VALUES ('$username', '$password');";
+    $result_create_user = $conn->query($sql_create_user);
+
+    header("Location: ../pages/admin.php");
 }
 
 ?>
@@ -91,7 +100,7 @@ if (isset($_POST["create-submit"])){
     </div>
     <div class="admin-container">
 
-        <a class="back-btn" onclick="history.go(-2)"><i class="fas fa-chevron-left"></i> Zurück</a>
+        <a class="back-btn" href="../../index.php"><i class="fas fa-chevron-left"></i> Zurück</a>
         <div class="drops">
 
             <button type='button' class='collapsible'>Users<i style='float:right' class='fas fa-chevron-down'></i></button>
@@ -108,7 +117,6 @@ if (isset($_POST["create-submit"])){
             </div>
         </div>
         <div class="drops">
-
             <button type='button' class='collapsible'>Rooms<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div style='cursor:pointer;' class='content'>
                 <?php
