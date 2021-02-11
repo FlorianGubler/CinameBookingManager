@@ -164,3 +164,28 @@ body{
     visibility: visible;
     z-index: 5;
 }
+
+.create-movie form, .create-user form, .create-room form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.ipf{
+    margin: 10px 5px 10px;
+}
+
+    textarea    {
+    border-style: inset;
+    border-width: 0.25px;
+}
+
+.movie-desc{
+    resize: none;
+}
+
+.movie-desc:focus{
+    height: 100px;
+    overflow:visible;
+}

@@ -33,11 +33,11 @@ if (isset($_POST["room-show"])) {
     }
     $showroom = TRUE;
 }
-if (isset($_POST["create-user-submit"])){
+if (isset($_POST["create-user-submit"])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $password = hash("sha256", $username.$password);
+    $password = hash("sha256", $username . $password);
 
     $sql_create_user = "INSERT INTO users (users.username, users.password) VALUES ('$username', '$password');";
     $result_create_user = $conn->query($sql_create_user);
@@ -45,12 +45,12 @@ if (isset($_POST["create-user-submit"])){
     header("Location: ../pages/admin.php");
 }
 
-if (isset($_POST["create-movie-submit"])){
+if (isset($_POST["create-movie-submit"])) {
     $uploadDirectory = "../image/";
 
     $errors = []; // Store errors here
 
-    $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed 
+    $fileExtensionsAllowed = ['jpeg', 'jpg', 'png']; // These will be the only file extensions allowed 
 
     $fileName = $_FILES['poster']['name'];
     $fileSize = $_FILES['poster']['size'];
@@ -61,15 +61,15 @@ if (isset($_POST["create-movie-submit"])){
     $fsk = $_POST['fsk'];
     $description = $_POST['description'];
 
-    if(empty($movie_name) || empty($fsk) || empty($description)){
+    if (empty($movie_name) || empty($fsk) || empty($description)) {
         $errors[] = "Es wurden nicht alle nötigen Infos angegeben";
     }
 
-    $fileExtension = strtolower(end(explode('.',$fileName)));
+    $fileExtension = strtolower(end(explode('.', $fileName)));
 
-    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName); 
+    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName);
 
-    if (! in_array($fileExtension,$fileExtensionsAllowed)) {
+    if (!in_array($fileExtension, $fileExtensionsAllowed)) {
         $errors[] = "Diese File Art ist nicht erlaubt. Bitte nutze ein JPG oder PNG File.";
     }
 
@@ -86,14 +86,13 @@ if (isset($_POST["create-movie-submit"])){
             $conn->query($sql_create_movie);
 
             header("Location: ../pages/admin.php");
-        } 
-        else {
+        } else {
             $errors[] =  "Ein unbekannter Fehler ist aufgetreten. Bitte kontaktiere einen Administrator.";
         }
     }
 }
 
-if (isset($_POST["create-room-submit"])){
+if (isset($_POST["create-room-submit"])) {
     $roomnr = $_POST['room-nr'];
     $sql_create_room = "INSERT INTO `rooms` (rooms.number) VALUES ($roomnr);";
     $conn->query($sql_create_room);
@@ -106,8 +105,8 @@ if (isset($_POST["create-room-submit"])){
     $cols = $_POST['rows'];
     $rows = $_POST['cols'];
 
-    for($i=1; $i <= $rows; $i++){
-        for($b=1; $b <= $cols; $b++){
+    for ($i = 1; $i <= $rows; $i++) {
+        for ($b = 1; $b <= $cols; $b++) {
             $sql_create_seats = "INSERT INTO `seats` (`row`, `col`, `except`, `FK_room`) VALUES ($i, $b, 0, $roomid);";
             $conn->query($sql_create_seats);
         }
@@ -115,7 +114,7 @@ if (isset($_POST["create-room-submit"])){
 
     header("Location: ../pages/admin.php");
 }
-
+//SET was here
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,45 +132,45 @@ if (isset($_POST["create-room-submit"])){
 <body>
     <?php include "../page_addon/navbar.php"; ?>
     <div id="create-user" class="create-user">
+        <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
+        <h2>CREATE</h2>
         <form action="" method="post">
-            <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
-            <h2>CREATE</h2>
-            <input placeholder="Username" name="username" type="username">
-            <input placeholder="Passwort" name="password" type="password">
-            <button name="create-user-submit" type="submit">CREATE</button>
+            <input class="ipf" placeholder="Username" name="username" type="username">
+            <input class="ipf" placeholder="Passwort" name="password" type="password">
+            <button class="ipf" name="create-user-submit" type="submit">CREATE</button>
         </form>
     </div>
     <div class="errors-container">
         <?php
-            foreach ($errors as $error) {
-                echo "<p class='error'>".$error."</p>";
-            }
+        foreach ($errors as $error) {
+            echo "<p class='error'>" . $error . "</p>";
+        }
         ?>
     </div>
 
     <div id="create-movie" class="create-movie">
+        <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
+        <h2>CREATE</h2>
         <form action="" method="post" enctype="multipart/form-data">
-            <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
-            <h2>CREATE</h2>
-            <input placeholder="Film Poster" name="poster" type="file">
-            <input placeholder="Filmtitel" name="movie-name" type="username">
-            <input placeholder="FSK" name="fsk" type="">
-            <textarea placeholder="Beschreibung" name="description" rows="1"></textarea>
-            <button name="create-movie-submit" type="submit">CREATE</button>
+            <input class="ipf" placeholder="Film Poster" name="poster" type="file">
+            <input class="ipf" placeholder="Filmtitel" name="movie-name" type="username">
+            <input class="ipf" placeholder="FSK" name="fsk" type="">
+            <textarea class="ipf" class="movie-desc" placeholder="Beschreibung" name="description" rows="1"></textarea>
+            <button class="ipf" name="create-movie-submit" type="submit">CREATE</button>
         </form>
     </div>
 
     <div id="create-room" class="create-room">
+        <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
+        <h2>CREATE</h2>
         <form action="" method="post" enctype="multipart/form-data">
-            <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
-            <h2>CREATE</h2>
-            <input name="rows" type="number" placeholder="Anzahl Reihen">
-            <input name="cols" type="number" placeholder="Anzahl Sitze pro Reihe">
-            <input name="room-nr" type="number" placeholder="Raumnummer">
-            <button name="create-room-submit" type="submit">CREATE</button>
+            <input class="ipf" name="rows" type="number" placeholder="Anzahl Reihen">
+            <input class="ipf"name="cols" type="number" placeholder="Anzahl Sitze pro Reihe">
+            <input class="ipf" name="room-nr" type="number" placeholder="Raumnummer">
+            <button class="ipf" name="create-room-submit" type="submit">CREATE</button>
         </form>
     </div>
-    
+
     <div class="thebigblock"></div>
     <div class="showroomoverlay">
         <a href=""><i style="float: right; color: gray;" class="fas fa-times"></i></a>
@@ -262,6 +261,9 @@ if (isset($_POST["create-room-submit"])){
             echo "<div class='movieoverlay' id='" . urlencode($movie->name) . "'>";
             echo "<a href='admin.php'><i style='float: right; color: gray;' class='fas fa-times'></i></a>";
             echo "<h2>" . $movie->name . "</h2>";
+            echo "<a href='admin.php?new-movie-time=".$movie->id."'>CREATE MOVIE TIME</a><br>";
+            echo $movie->name;
+            echo $movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id;
             foreach ($movie->times as $times) {
                 echo "Room: " . $times->room . " -> " . $times->start . " - " . $times->end . "<br>";
             }
