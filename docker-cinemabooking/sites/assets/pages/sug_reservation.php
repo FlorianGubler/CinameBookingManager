@@ -103,7 +103,7 @@
         
         $new_res->safetodb($conntwo);
         header("Location: ../../index.php");
-
+        
     }
     else{
         header("Location: ../../index.php");

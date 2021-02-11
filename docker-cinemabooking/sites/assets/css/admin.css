@@ -23,7 +23,7 @@ body{
 }
 
 .drops{
-    width: 20%;
+    width: 300px;
 }
 
 .drops button,.new-movie-time{
@@ -64,15 +64,14 @@ body{
     text-align: left;
     padding: 7px;
     display: none;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 30%;
     background-color: #9b9b9b;
 }
-
 .drops .specialbutton{
     color: rgb(187, 224, 168);
 }
-
-
 .seat{
     width: 10px;
     height: 10px;
@@ -113,7 +112,7 @@ body{
     border-radius: 15px;
     top: 10%;
     position: absolute;
-    right: 10%;
+    cursor: move;
     padding: 15px;
     visibility: hidden;
     overflow: hidden;
@@ -129,14 +128,14 @@ body{
 .thebigblock{
     background-color: rgb(61, 61, 61);
     position: absolute;
-    width: 20%;
+    width: 300px;
     left: 0;
     top:0;
     z-index: -10;
     height: 100%;
 }
 
-.create-user, .create-movie, .create-room{
+.create-user, .create-movie, .create-room, .create-mv-times{
     background-color:rgb(184, 184, 184);
     border-radius: 15px;
     top: 10%;
@@ -146,6 +145,7 @@ body{
     visibility: hidden;
     overflow: hidden;
     display: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .create-user:target{
@@ -160,13 +160,20 @@ body{
     z-index: 5;
 }
 
+.create-mv-times{
+    display: block;
+    visibility: visible;
+    z-index: 5;
+    width: max-content;
+}
+
 .create-room:target{
     display: block;
     visibility: visible;
     z-index: 5;
 }
 
-.create-movie form, .create-user form, .create-room form{
+.create-movie form, .create-user form, .create-room form, .create-mv-times form{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -175,9 +182,10 @@ body{
 
 .ipf{
     margin: 10px 5px 10px;
+    text-align: center;
 }
 
-    textarea    {
+textarea {
     border-style: inset;
     border-width: 0.25px;
 }
@@ -189,4 +197,17 @@ body{
 .movie-desc:focus{
     height: 100px;
     overflow:visible;
+}
+#reservations{
+    display: none;
+    background-color:rgb(184, 184, 184);
+    border-radius: 15px;
+    top: 15%;
+    position: absolute;
+    left: 25%;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#reservations:target{
+    display: block;
 }

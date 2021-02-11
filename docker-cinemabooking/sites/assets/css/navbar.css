@@ -11,6 +11,9 @@ body{
     transform: translate(-50%);
     background-color: rgb(214, 214, 214);
 }
+button{
+    text-align: left;
+}
 html{
     padding: 30px;
     padding-top: 0;
