@@ -35,7 +35,7 @@ html{
 .navbar{
     width: 100%;
     height: 60px;
-    background-color: rgba(219, 211, 92, 0.904);
+    background-color: rgb(219,211,104);
     display: flex;
     flex-direction: row;
     align-items: center;
