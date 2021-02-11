@@ -261,9 +261,7 @@ if (isset($_POST["create-room-submit"])) {
             echo "<div class='movieoverlay' id='" . urlencode($movie->name) . "'>";
             echo "<a href='admin.php'><i style='float: right; color: gray;' class='fas fa-times'></i></a>";
             echo "<h2>" . $movie->name . "</h2>";
-            echo "<a href='admin.php?new-movie-time=".$movie->id."'>CREATE MOVIE TIME</a><br>";
-            echo $movie->name;
-            echo $movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id.$movie->id;
+            echo "<a class='new-movie-time' href='admin.php?new-movie-time=".$movie->id."'>CREATE MOVIE TIME</a><br>";
             foreach ($movie->times as $times) {
                 echo "Room: " . $times->room . " -> " . $times->start . " - " . $times->end . "<br>";
             }
