@@ -33,7 +33,7 @@ if (isset($_POST["room-show"])) {
     }
     $showroom = TRUE;
 }
-if (isset($_POST["create-submit"])){
+if (isset($_POST["create-user-submit"])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -41,6 +41,77 @@ if (isset($_POST["create-submit"])){
 
     $sql_create_user = "INSERT INTO users (users.username, users.password) VALUES ('$username', '$password');";
     $result_create_user = $conn->query($sql_create_user);
+
+    header("Location: ../pages/admin.php");
+}
+
+if (isset($_POST["create-movie-submit"])){
+    $uploadDirectory = "../image/";
+
+    $errors = []; // Store errors here
+
+    $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed 
+
+    $fileName = $_FILES['poster']['name'];
+    $fileSize = $_FILES['poster']['size'];
+    $fileTmpName  = $_FILES['poster']['tmp_name'];
+    $fileType = $_FILES['poster']['type'];
+
+    $movie_name = $_POST['movie-name'];
+    $fsk = $_POST['fsk'];
+    $description = $_POST['description'];
+
+    if(empty($movie_name) || empty($fsk) || empty($description)){
+        $errors[] = "Es wurden nicht alle nötigen Infos angegeben";
+    }
+
+    $fileExtension = strtolower(end(explode('.',$fileName)));
+
+    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName); 
+
+    if (! in_array($fileExtension,$fileExtensionsAllowed)) {
+        $errors[] = "Diese File Art ist nicht erlaubt. Bitte nutze ein JPG oder PNG File.";
+    }
+
+    if ($fileSize > 4000000) {
+        $errors[] = "Das Bild ist zu gross (Max. 4GB)";
+    }
+
+    if (empty($errors)) {
+        $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+
+        if ($didUpload) {
+            //Safe Things to DB
+            $sql_create_movie = "INSERT INTO movies (movies.name, movies.img_path, movies.fsk, movies.description) VALUES ('$movie_name', '$fileName', '$fsk', '$description');";
+            $conn->query($sql_create_movie);
+
+            header("Location: ../pages/admin.php");
+        } 
+        else {
+            $errors[] =  "Ein unbekannter Fehler ist aufgetreten. Bitte kontaktiere einen Administrator.";
+        }
+    }
+}
+
+if (isset($_POST["create-room-submit"])){
+    $roomnr = $_POST['room-nr'];
+    $sql_create_room = "INSERT INTO `rooms` (rooms.number) VALUES ($roomnr);";
+    $conn->query($sql_create_room);
+
+    //Get Rooms ID
+    $sql_get_roomid = "SELECT id FROM rooms WHERE rooms.number=$roomnr;";
+    $result_get_roomid = $conn->query($sql_get_roomid);
+    $roomid = $result_get_roomid->fetch_assoc()['id'];
+
+    $cols = $_POST['rows'];
+    $rows = $_POST['cols'];
+
+    for($i=1; $i <= $rows; $i++){
+        for($b=1; $b <= $cols; $b++){
+            $sql_create_seats = "INSERT INTO `seats` (`row`, `col`, `except`, `FK_room`) VALUES ($i, $b, 0, $roomid);";
+            $conn->query($sql_create_seats);
+        }
+    }
 
     header("Location: ../pages/admin.php");
 }
@@ -66,10 +137,41 @@ if (isset($_POST["create-submit"])){
             <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
             <h2>CREATE</h2>
             <input placeholder="Username" name="username" type="username">
-            <input placeholder="Password" name="password" type="password">
-            <button name="create-submit" type="submit">CREATE</button>
+            <input placeholder="Passwort" name="password" type="password">
+            <button name="create-user-submit" type="submit">CREATE</button>
         </form>
     </div>
+    <div class="errors-container">
+        <?php
+            foreach ($errors as $error) {
+                echo "<p class='error'>".$error."</p>";
+            }
+        ?>
+    </div>
+
+    <div id="create-movie" class="create-movie">
+        <form action="" method="post" enctype="multipart/form-data">
+            <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
+            <h2>CREATE</h2>
+            <input placeholder="Film Poster" name="poster" type="file">
+            <input placeholder="Filmtitel" name="movie-name" type="username">
+            <input placeholder="FSK" name="fsk" type="">
+            <textarea placeholder="Beschreibung" name="description" rows="1"></textarea>
+            <button name="create-movie-submit" type="submit">CREATE</button>
+        </form>
+    </div>
+
+    <div id="create-room" class="create-room">
+        <form action="" method="post" enctype="multipart/form-data">
+            <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
+            <h2>CREATE</h2>
+            <input name="rows" type="number" placeholder="Anzahl Reihen">
+            <input name="cols" type="number" placeholder="Anzahl Sitze pro Reihe">
+            <input name="room-nr" type="number" placeholder="Raumnummer">
+            <button name="create-room-submit" type="submit">CREATE</button>
+        </form>
+    </div>
+    
     <div class="thebigblock"></div>
     <div class="showroomoverlay">
         <a href=""><i style="float: right; color: gray;" class="fas fa-times"></i></a>
@@ -120,7 +222,7 @@ if (isset($_POST["create-submit"])){
             <button type='button' class='collapsible'>Rooms<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div style='cursor:pointer;' class='content'>
                 <?php
-                echo "<div><form action='createroom.php' method='post'>";
+                echo "<div><form action='#create-room' method='post'>";
                 echo "<button type='submit' name='createroom.php' class='specialbutton'>CREATE<br>";
                 echo "</form></div>";
                 foreach ($roomarr as $room) {
@@ -143,7 +245,7 @@ if (isset($_POST["create-submit"])){
             <button type='button' class='collapsible'>Movies<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div style='cursor:pointer;' class="content">
                 <?php
-                echo "<div><form action='addmovie.php' method='post'>";
+                echo "<div><form action='#create-movie' method='post'>";
                 echo "<button type='submit' name='add-movie' class='specialbutton'>CREATE<br>";
                 echo "</form></div>";
                 foreach ($moviearr as $movie) {

@@ -135,7 +135,7 @@ body{
     height: 100%;
 }
 
-.create-user{
+.create-user, .create-movie, .create-room{
     background-color:rgb(184, 184, 184);
     border-radius: 15px;
     top: 10%;
@@ -148,6 +148,18 @@ body{
 }
 
 .create-user:target{
+    display: block;
+    visibility: visible;
+    z-index: 5;
+}
+
+.create-movie:target{
+    display: block;
+    visibility: visible;
+    z-index: 5;
+}
+
+.create-room:target{
     display: block;
     visibility: visible;
     z-index: 5;
