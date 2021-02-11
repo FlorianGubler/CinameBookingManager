@@ -13,7 +13,6 @@
         }
 
         public function safetodb($dbconnection){
-
             //Find Movie Time ID
             $sql_find_mov = "SELECT id FROM movie_times WHERE start='".$this->mv_time->start."' AND end='".$this->mv_time->end."';";
             $result_find_mov = $dbconnection->query($sql_find_mov);
@@ -50,7 +49,6 @@
 
             //Create Reservated Seats
             foreach($this->reservated_seats as $this_res_seats){
-
                 //Get Seat ID
                 $sql_find_seatid = "SELECT * from seats WHERE seats.row=".$this_res_seats->row." AND seats.col=".$this_res_seats->col.";";
                 $result_find_seatid = $dbconnection->query($sql_find_seatid);
