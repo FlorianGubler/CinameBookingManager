@@ -31,7 +31,7 @@
     $sql_movie = "SELECT * FROM movies";
     if ($result_movie = $conn->query($sql_movie)) {
         while ($row_movie = $result_movie->fetch_assoc()) {
-            $newmovie = new Movie($row_mv_times['id'], $row_movie['name'], $row_movie['img_path'], $row_movie['fsk'], $row_movie['description'], $location);
+            $newmovie = new Movie($row_movie['id'], $row_movie['name'], $row_movie['img_path'], $row_movie['fsk'], $row_movie['description'], $location);
 
             //Get Movie Times
             $sql_mv_times = "SELECT * FROM movie_times WHERE FK_movie=".$row_movie['id'].";";

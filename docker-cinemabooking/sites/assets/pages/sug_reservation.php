@@ -62,9 +62,17 @@
                 $row = explode("-", $rowcol)[0];
                 $col = explode("-", $rowcol)[1];
                 if($row == $seat->row && $col == $seat->col){
-                    if(!$seat->reservated){
+                    if(!$seat->reservated){  
                         $new_res_seat = $seat;
                         array_push($res_seats_arr, $new_res_seat);
+                    }
+                    else{
+                        foreach($seat->reservated_mv_times as $res_mv_time){
+                            if($res_mv_time[0]->name != $movie || ($res_mv_time[1]->start != $date_start && $res_mv_time[1]->end != $date_end)){
+                                $new_res_seat = $seat;
+                                array_push($res_seats_arr, $new_res_seat);
+                            }
+                        }
                     }
                 }
             }
@@ -92,11 +100,10 @@
         if ($conn->connect_errno) {
             die("Failed to connect to MySQL: " . $conn->connect_error);
         }
-
+        
         $new_res->safetodb($conntwo);
-
         header("Location: ../../index.php");
-
+        
     }
     else{
         header("Location: ../../index.php");
@@ -127,31 +134,38 @@
                         <tr>
                             <table class="seats-in-table">
                                 <?php
-                                    foreach($roomseats as $seatrow){
-                                        echo "<tr>";
-                                        foreach($seatrow as $seat){
-                                            echo "<td>";
-                                            if(!$seat->except){
-                                                if($seat->reservated){
-                                                    foreach($seat->reservated_mv_times as $res_mv_time_seat){
-                                                        if($res_mv_time_seat[0] == $currmov && $res_mv_time_seat[1] == $currmov_time){
-                                                            echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: red'></div>";
+                                    if(isset($_POST['set-res-btn'])){
+                                        foreach($roomseats as $seatrow){
+                                            echo "<tr>";
+                                            foreach($seatrow as $seat){
+                                                echo "<td>";
+                                                if(!$seat->except){
+                                                    if($seat->reservated){
+                                                        foreach($seat->reservated_mv_times as $res_mv_time_seat){
+                                                            if($res_mv_time_seat[0] == $currmov && $res_mv_time_seat[1] == $currmov_time){
+                                                                echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: red'></div>";
+                                                                $checker_time_room = false;
+                                                                break;
+                                                            }
+                                                            else{
+                                                                $checker_time_room = true;
+                                                            }
                                                         }
-                                                        else{
+                                                        if($checker_time_room){
                                                             echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: green'></div>";
                                                         }
                                                     }
+                                                    else{
+                                                        echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: green'></div>";
+                                                    }
                                                 }
                                                 else{
-                                                    echo "<div id='avail-seat_".$seat->row."-".$seat->col."' onclick='setseat(this.id);' class='seat' style='cursor:pointer;background-color: green'></div>";
+                                                    echo "<div class='seat-empty' ></div>";
                                                 }
+                                                echo "</td>";
                                             }
-                                            else{
-                                                echo "<div class='seat-empty' ></div>";
-                                            }
-                                            echo "</td>";
+                                            echo "</tr>";
                                         }
-                                        echo "</tr>";
                                     }
                                 ?>
                             </table>

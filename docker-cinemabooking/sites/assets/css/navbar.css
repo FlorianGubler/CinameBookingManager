@@ -4,17 +4,19 @@
 }
 body{
     width: 80%;
-    min-height: 93.5vh;
+    min-height: 95vh;
     height: min-content;
     position: relative;
     left: 50%;
     transform: translate(-50%);
     background-color: rgb(214, 214, 214);
 }
+button{
+    text-align: left;
+}
 html{
     padding: 30px;
     padding-top: 0;
-    padding-bottom: 0;
     background-color: rgb(185, 185, 185);
     background-image: url("../image/background_cinema.jpg");
 }
