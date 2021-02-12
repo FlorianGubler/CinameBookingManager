@@ -1,0 +1,10 @@
+Nino, Jon, Florian
+
+Diese Woche lief eigentlich sehr gut. Wir haben einiges über OOP gelernt und haben uns weiterentwickelt. 
+Wir haben auch einiges über die Kommunikation von PHP im Hintergrund gelernt, 
+waswir sehr spannend fanden. Wir denken wir können uns für nächstes Mal dennoch um einiges steigern, 
+was die objektorientierte Programmierung angeht. Vorallem was die Funktionen der Klassen angeht 
+und auch die Magic Methods gibt es noch einige ungenutzte Möglichkeiten. Wir haben hier im Projekt viele 
+Funktionen und Code einfach so geschrieben, obwohl es wohl einiges sinnvoller wäre, 
+diese auf eine Klasse zu legen. IWir denken aber mit etwas üben, kommen wir da gut vorann und können 
+das nächstes Mal besser machen. 
