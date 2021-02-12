@@ -302,6 +302,7 @@ if(isset($_POST['create-movie-times-submit'])){
                                     cols = document.getElementById('cols-input').value;
 
                                     if(rows != "" && cols != ""){
+                                        var info = document.getElementById("preview-info").style.display = "none";
                                         var table_seat = document.getElementById("seats-room-table");
                                         table_seat.innerHTML = "";
 

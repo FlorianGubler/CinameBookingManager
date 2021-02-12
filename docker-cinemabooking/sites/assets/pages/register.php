@@ -36,7 +36,7 @@
         <a class="back-btn" href="../../index.php"><i class="fas fa-chevron-left"></i> Zurück</a>
         <div class="movinfo">
             <img src="../image/<?php echo $currmov->img;?>">
-            <p><b>Name:</b> <?php echo $currmov->name;?></p>
+            <p><b>Titel:</b> <?php echo $currmov->name;?></p>
             <p><b>Altersfreigabe:</b> FSK ab <?php echo $currmov->fsk;?> Jahren</p>
             <p><b>Beschreibung:</b> <?php echo $currmov->description;?></p>
         </div>
