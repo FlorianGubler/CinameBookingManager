@@ -85,9 +85,6 @@
 .back-btn:hover{
     color: rgb(163, 88, 88);
 }
-.shadowinput{
-    display: none;
-}
 .order-container{
     position: relative;
     top: 0;
