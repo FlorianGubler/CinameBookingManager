@@ -235,7 +235,7 @@ if(isset($_POST['create-movie-submit'])){
             <input class="ipf" placeholder="Film Poster" name="poster" type="file">
             <input class="ipf" placeholder="Filmtitel" name="movie-name" type="username">
             <input class="ipf" placeholder="FSK" name="fsk" type="number">
-            <textarea class="ipf" class="movie-desc" placeholder="Beschreibung" name="description" rows="1"></textarea>
+            <textarea class="ipf"  placeholder="Beschreibung" name="description" rows="1"></textarea>
             <button class="ipf" name="create-mv-time" type="submit">CREATE</button>
         </form>
     </div>
@@ -266,8 +266,8 @@ if(isset($_POST['create-movie-submit'])){
     </div>
 
     <div class="thebigblock"></div>
-    <div class="showroomoverlay">
-        <a href=""><i style="float: right; color: gray;" class="fas fa-times"></i></a>
+    <div id="roomoverlay" class="showroomoverlay" style="cursor: pointer;padding: 10px;">
+        <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
         <table>
             <tr colspan='100%'>
                 <div id='canvas'></div>
@@ -292,6 +292,7 @@ if(isset($_POST['create-movie-submit'])){
                 </table>
             </tr>
         </table>
+        <script>dragElement(document.getElementById('roomoverlay'));</script>
     </div>
     <div class="admin-container">
         <a class="back-btn" href="../../index.php"><i class="fas fa-chevron-left"></i> Zurück</a>
@@ -299,7 +300,7 @@ if(isset($_POST['create-movie-submit'])){
             <button type='button' class='collapsible'>Admin Users<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div class='content'>
                 <?php
-                echo "<div><form action='#create-user' method='post'>";
+                echo "<div><form action='admin.php#create-user' method='post'>";
                 echo "<button type='submit' name='new-user' class='specialbutton'>CREATE NEW<br>";
                 echo "</form></div>";
                 foreach ($usersarr as $user) {
@@ -312,7 +313,7 @@ if(isset($_POST['create-movie-submit'])){
             <button type='button' class='collapsible'>Rooms<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div style='cursor:pointer;' class='content'>
                 <?php
-                echo "<div><form action='#create-room' method='post'>";
+                echo "<div><form action='admin.php#create-room' method='post'>";
                 echo "<button type='submit' name='createroom.php' class='specialbutton'>CREATE NEW<br>";
                 echo "</form></div>";
                 foreach ($roomarr as $room) {
@@ -334,7 +335,7 @@ if(isset($_POST['create-movie-submit'])){
             <button type='button' class='collapsible'>Movies<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div style='cursor:pointer;' class="content">
                 <?php
-                echo "<div><form action='#create-movie' method='post'>";
+                echo "<div><form action='admin.php#create-movie' method='post'>";
                 echo "<button type='submit' name='add-movie' class='specialbutton'>CREATE NEW<br>";
                 echo "</form></div>";
                 foreach ($moviearr as $movie) {
@@ -349,6 +350,7 @@ if(isset($_POST['create-movie-submit'])){
             <button onclick="changeanchor('#reservations');" class='collapsible'>Reservations</button>
         </div>
         <div id="reservations">
+                <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
                 <h2 style="padding-bottom: 10px;">Reservations</h2>
                 <?php
                     foreach ($reservationarr as $reservation) {
@@ -360,7 +362,7 @@ if(isset($_POST['create-movie-submit'])){
                         echo "</div><br>";
                     }
                 ?>
-            </div>
+        </div>
         <?php
         foreach ($moviearr as $movie) {
             echo "<div class='movieoverlay' id='" . urlencode($movie->name) . "'>";

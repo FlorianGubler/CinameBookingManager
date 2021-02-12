@@ -185,18 +185,37 @@ body{
     text-align: center;
 }
 
-textarea {
-    border-style: inset;
-    border-width: 0.25px;
+.ipf {
+    width: 100%;
+    padding: 7px 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
 }
 
-.movie-desc{
-    resize: none;
+.ipf[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.movie-desc:focus{
-    height: 100px;
-    overflow:visible;
+.ipf[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.ipf[type=file]{
+    border: none;
+}
+textarea.ipf{
+    resize: vertical;
+    max-height: 300px;
+    min-height: 35px;
 }
 #reservations{
     display: none;
