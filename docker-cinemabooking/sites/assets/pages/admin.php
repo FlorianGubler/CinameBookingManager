@@ -296,7 +296,7 @@ if(isset($_POST['create-movie-submit'])){
     <div class="admin-container">
         <a class="back-btn" href="../../index.php"><i class="fas fa-chevron-left"></i> Zurück</a>
         <div class="drops">
-            <button type='button' class='collapsible'>Users<i style='float:right' class='fas fa-chevron-down'></i></button>
+            <button type='button' class='collapsible'>Admin Users<i style='float:right' class='fas fa-chevron-down'></i></button>
             <div class='content'>
                 <?php
                 echo "<div><form action='#create-user' method='post'>";
