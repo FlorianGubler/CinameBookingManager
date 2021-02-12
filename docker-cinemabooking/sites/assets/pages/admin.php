@@ -129,7 +129,8 @@ if (isset($_POST["create-room-submit"])) {
     $_POST = array();
     header("Location: ../pages/admin.php");
 }
-if(isset($_POST['create-movie-submit'])){
+
+if(isset($_POST['create-movie-times-submit'])){
     $room = $_POST['mv-room'];
     $movie = $_POST['mv-movie'];
     $time_start = $_POST['mv-start'];
@@ -236,7 +237,7 @@ if(isset($_POST['create-movie-submit'])){
             <input class="ipf" placeholder="Filmtitel" name="movie-name" type="username">
             <input class="ipf" placeholder="FSK" name="fsk" type="number">
             <textarea class="ipf"  placeholder="Beschreibung" name="description" rows="1"></textarea>
-            <button class="ipf" name="create-mv-time" type="submit">CREATE</button>
+            <button class="ipf" name="create-movie-submit" type="submit">CREATE</button>
         </form>
     </div>
 
@@ -249,7 +250,7 @@ if(isset($_POST['create-movie-submit'])){
             <input name="mv-movie" value="<?php echo $_GET['new-movie-time']; ?>" type="hidden">
             <input class="ipf" placeholder="Filmstart (yyyy-mm-dd hh-mm-ss)" name="mv-start" type="datetime">
             <input class="ipf" placeholder="Filmende (yyyy-mm-dd hh-mm-ss)" name="mv-end" type="datetime">
-            <button class="ipf" name="create-movie-submit" type="submit">CREATE</button>
+            <button class="ipf" name="create-movie-times-submit" type="submit">CREATE</button>
         </form>
     </div>
     <?php } ?>
