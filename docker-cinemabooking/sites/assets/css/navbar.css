@@ -17,6 +17,7 @@ button{
 html{
     padding: 30px;
     padding-top: 0;
+    padding-bottom: 40px;
     background-color: rgb(185, 185, 185);
     background-image: url("../image/background_cinema.jpg");
 }
@@ -83,8 +84,8 @@ html{
     display: block;
 }
 .login form{
-    width: 25%;
-    height: 40%;
+    width: 400px;
+    height: 400px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -98,6 +99,9 @@ html{
     align-items: center;
     z-index: 100;
 }
+.login h2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .login input, .login button{
     margin: -10px;
     width: 70%;
@@ -108,7 +112,10 @@ html{
 }
 .login button{
     cursor: pointer;
+    text-align: center;
     background-color: rgb(231, 231, 231);
+    width: 100px;
+    padding: 5px;
 }
 .login a{
     position: absolute;
