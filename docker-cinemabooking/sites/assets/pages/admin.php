@@ -444,6 +444,9 @@ if(isset($_POST['create-movie-times-submit'])){
                         }
                         echo "</div><br>";
                     }
+                    if(count($reservationarr) == 0){
+                        echo "<p>Keine Reservationen gefunden</p>";
+                    }
                 ?>
         </div>
         <?php
