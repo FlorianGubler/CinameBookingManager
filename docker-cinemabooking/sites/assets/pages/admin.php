@@ -205,7 +205,6 @@ if(isset($_POST['create-movie-submit'])){
             url = url.split("#");
             window.location.href = url[0]+target;
         }
-        changeanchor('#reservations');
     </script>
     <?php include "../page_addon/navbar.php"; ?>
 
@@ -301,7 +300,7 @@ if(isset($_POST['create-movie-submit'])){
             <div class='content'>
                 <?php
                 echo "<div><form action='#create-user' method='post'>";
-                echo "<button type='submit' name='new-user' class='specialbutton'>CREATE<br>";
+                echo "<button type='submit' name='new-user' class='specialbutton'>CREATE NEW<br>";
                 echo "</form></div>";
                 foreach ($usersarr as $user) {
                     echo "<div> - " . $user->id . ": " . $user->username . "</div>";
@@ -314,7 +313,7 @@ if(isset($_POST['create-movie-submit'])){
             <div style='cursor:pointer;' class='content'>
                 <?php
                 echo "<div><form action='#create-room' method='post'>";
-                echo "<button type='submit' name='createroom.php' class='specialbutton'>CREATE<br>";
+                echo "<button type='submit' name='createroom.php' class='specialbutton'>CREATE NEW<br>";
                 echo "</form></div>";
                 foreach ($roomarr as $room) {
                     echo "<div><form action='admin.php?room=" . $room->id . "' method='post'>";
@@ -336,7 +335,7 @@ if(isset($_POST['create-movie-submit'])){
             <div style='cursor:pointer;' class="content">
                 <?php
                 echo "<div><form action='#create-movie' method='post'>";
-                echo "<button type='submit' name='add-movie' class='specialbutton'>CREATE<br>";
+                echo "<button type='submit' name='add-movie' class='specialbutton'>CREATE NEW<br>";
                 echo "</form></div>";
                 foreach ($moviearr as $movie) {
                     echo "<div><form action='#" . urlencode($movie->name) . "' method='post'>";
@@ -349,7 +348,8 @@ if(isset($_POST['create-movie-submit'])){
         <div class="drops">
             <button onclick="changeanchor('#reservations');" class='collapsible'>Reservations</button>
         </div>
-        <div style='cursor:pointer;' id="reservations">
+        <div id="reservations">
+                <h2 style="padding-bottom: 10px;">Reservations</h2>
                 <?php
                     foreach ($reservationarr as $reservation) {
                         echo "<div>" . $reservation->reservation_user->firstname . ", " . $reservation->reservation_user->lastname . " -> Movie: " . $reservation->movie->name . ", Time: " . $reservation->mv_time->start . " - " . $reservation->mv_time->end;
