@@ -115,12 +115,21 @@ if (isset($_POST["create-room-submit"])) {
     $result_get_roomid = $conn->query($sql_get_roomid);
     $roomid = $result_get_roomid->fetch_assoc()['id'];
 
-    $cols = $_POST['rows'];
-    $rows = $_POST['cols'];
+    $cols = $_POST['cols'];
+    $rows = $_POST['rows'];
+
+    $except_seats = json_decode($_POST['except-seats']);
 
     for ($i = 1; $i <= $rows; $i++) {
         for ($b = 1; $b <= $cols; $b++) {
-            $sql_create_seats = "INSERT INTO `seats` (`row`, `col`, `except`, `FK_room`) VALUES ($i, $b, 0, $roomid);";
+            echo "seat_$i-$b: ";
+            if(in_array("seat_$i-$b", $except_seats)){
+                $except = 1;
+            }
+            else{
+                $except = 0;
+            }
+            $sql_create_seats = "INSERT INTO `seats` (`row`, `col`, `except`, `FK_room`) VALUES ($i, $b, $except, $roomid);";
             $conn->query($sql_create_seats);
         }
     }
@@ -206,6 +215,20 @@ if(isset($_POST['create-movie-times-submit'])){
             url = url.split("#");
             window.location.href = url[0]+target;
         }
+        rm_seats = [];
+        function setrmseat(objid){
+            if(rm_seats.indexOf(objid) !== -1){
+                //Get Index
+                rm_seats.splice(rm_seats.indexOf(objid), 1);
+                document.getElementById(objid).style.backgroundColor = "pink";
+            }
+            else{
+                rm_seats.push(objid);
+                document.getElementById(objid).style.backgroundColor = "blue";
+            }
+
+            document.getElementById('sdh-input-except-seats').value = JSON.stringify(rm_seats);
+        }
     </script>
     <?php include "../page_addon/navbar.php"; ?>
 
@@ -213,7 +236,7 @@ if(isset($_POST['create-movie-times-submit'])){
         <?php
             if(isset($_POST['create-movie-submit'])){
                 foreach ($errors as $error) {
-                    echo "<p class='error'>" . $error . "</p>";
+                    echo "<p class='error'><i class='fas fa-exclamation-circle'></i> " . $error . "</p>";
                 }
             }
         ?>
@@ -223,8 +246,8 @@ if(isset($_POST['create-movie-times-submit'])){
         <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
         <h2>CREATE</h2>
         <form action="" method="post">
-            <input class="ipf" placeholder="Username" name="username" type="username">
-            <input class="ipf" placeholder="Passwort" name="password" type="password">
+            <input class="ipf" placeholder="Username" name="username" type="username" required>
+            <input class="ipf" placeholder="Passwort" name="password" type="password" required>
             <button class="ipf" name="create-user-submit" type="submit">CREATE</button>
         </form>
     </div>
@@ -234,9 +257,9 @@ if(isset($_POST['create-movie-times-submit'])){
         <h2>CREATE</h2>
         <form action="" method="post" enctype="multipart/form-data">
             <input class="ipf" placeholder="Film Poster" name="poster" type="file">
-            <input class="ipf" placeholder="Filmtitel" name="movie-name" type="username">
-            <input class="ipf" placeholder="FSK" name="fsk" type="number">
-            <textarea class="ipf"  placeholder="Beschreibung" name="description" rows="1"></textarea>
+            <input class="ipf" placeholder="Filmtitel" name="movie-name" type="username" required>
+            <input class="ipf" placeholder="FSK" name="fsk" type="number" required>
+            <textarea class="ipf" style="text-align: left;" rows="10" placeholder="Beschreibung" name="description" rows="1" required></textarea>
             <button class="ipf" name="create-movie-submit" type="submit">CREATE</button>
         </form>
     </div>
@@ -246,10 +269,10 @@ if(isset($_POST['create-movie-times-submit'])){
         <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
         <h2>CREATE</h2>
         <form action="" method="post">
-            <input class="ipf" placeholder="Kinosaal" name="mv-room" type="text">
-            <input name="mv-movie" value="<?php echo $_GET['new-movie-time']; ?>" type="hidden">
-            <input class="ipf" placeholder="Filmstart (yyyy-mm-dd hh-mm-ss)" name="mv-start" type="datetime">
-            <input class="ipf" placeholder="Filmende (yyyy-mm-dd hh-mm-ss)" name="mv-end" type="datetime">
+            <input class="ipf" placeholder="Kinosaal" name="mv-room" type="text" required>
+            <input name="mv-movie" value="<?php echo $_GET['new-movie-time']; ?>" type="hidden" required>
+            <input class="ipf" placeholder="Filmstart (yyyy-mm-dd hh-mm-ss)" name="mv-start" type="datetime" required>
+            <input class="ipf" placeholder="Filmende (yyyy-mm-dd hh-mm-ss)" name="mv-end" type="datetime" required>
             <button class="ipf" name="create-movie-times-submit" type="submit">CREATE</button>
         </form>
     </div>
@@ -259,9 +282,67 @@ if(isset($_POST['create-movie-times-submit'])){
         <a href="admin.php"><i style="float: right; color: gray;" class="fas fa-times"></i></a>
         <h2>CREATE</h2>
         <form action="" method="post" enctype="multipart/form-data">
-            <input class="ipf" name="rows" type="number" placeholder="Anzahl Reihen">
-            <input class="ipf"name="cols" type="number" placeholder="Anzahl Sitze pro Reihe">
-            <input class="ipf" name="room-nr" type="number" placeholder="Raumnummer">
+            <input onchange="showroom();" id="rows-input" class="ipf" name="rows" type="number" placeholder="Anzahl Reihen" required>
+            <input onchange="showroom();" class="ipf" name="cols" id="cols-input" type="number" placeholder="Anzahl Sitze pro Reihe" required>
+            <input class="ipf" name="room-nr" type="number" placeholder="Raumnummer" required>
+            <input class="shadowinput" id="sdh-input-except-seats" name="except-seats" type="hidden">
+            <h4>Sitze entfernen</h4>
+            <p class="shadowinput" id="preview-info"></p>
+            <table id="preview-container" style="width: min-content; margin:auto auto;">
+                <tr colspan='100%'>
+                    <td><div id='canvas'></div></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="seats-in-table" id="seats-room-table">
+                            <script>
+                                showroom();
+                                function showroom(){
+                                    rows = document.getElementById('rows-input').value;
+                                    cols = document.getElementById('cols-input').value;
+
+                                    if(rows != "" && cols != ""){
+                                        var table_seat = document.getElementById("seats-room-table");
+                                        table_seat.innerHTML = "";
+
+                                        for(let i=1; i<=rows; i++){
+                                            let tr = document.createElement('tr');
+                                            for(let b=1; b<=cols; b++){
+                                                let td = document.createElement('td');
+
+                                                let seat = document.createElement('div');
+
+                                                //Set Attributes
+                                                seat.classList.add('seat');
+                                                seat.id = "seat_"+i+"-"+b;
+                                                if(rm_seats.indexOf(seat.id) !== -1){
+                                                    seat.style.backgroundColor = 'blue';
+                                                }
+                                                else{
+                                                    seat.style.backgroundColor = 'pink';
+                                                    
+                                                    seat.style.cursor = 'pointer';
+                                                }
+                                                seat.setAttribute("onclick", "setrmseat(this.id);");
+
+                                                td.appendChild(seat);
+                                                tr.appendChild(td);
+                                            }
+                                            table_seat.appendChild(tr);
+                                        }
+                                    }
+                                    else{
+                                        var info = document.getElementById("preview-info");
+                                        info.innerHTML = "Keine Vorschau verfügbar";
+                                        info.classList.remove('shadowinput');
+                                    }
+                                }
+                                $rows = document.getElementById
+                            </script>
+                        </table>
+                    </td>
+                </tr>
+            </table>
             <button class="ipf" name="create-room-submit" type="submit">CREATE</button>
         </form>
     </div>

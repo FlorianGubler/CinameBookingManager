@@ -20,6 +20,9 @@ html{
     background-color: rgb(185, 185, 185);
     background-image: url("../image/background_cinema.jpg");
 }
+.shadowinput{
+    display: none;
+}
 .headinfo{
     position: absolute;
     top: 102%;
